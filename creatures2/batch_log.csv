@@ -1,0 +1,84 @@
+file,status,output,error
+Aboleth.png,success,Aboleth.png,
+Alligator.png,success,Alligator.png,
+Anaconda.png,success,Anaconda.png,
+Animated_Corpse.png,success,Animated_Corpse.png,
+Arzanezra.png,success,Arzanezra.png,
+Baboon_Wight.png,success,Baboon_Wight.png,
+Basilisk.png,success,Basilisk.png,
+Black_Pudding.png,success,Black_Pudding.png,
+Bollust.png,success,Bollust.png,
+Bulette.png,success,Bulette.png,
+Chameleon.png,success,Chameleon.png,
+Chavakuth.png,success,Chavakuth.png,
+Couatl.png,success,Couatl.png,
+Crocodile.png,success,Crocodile.png,
+Crocolisk.png,success,Crocolisk.png,
+Dimetrodon.png,success,Dimetrodon.png,
+Dolathuzar.png,success,Dolathuzar.png,
+Dracolich.png,success,Dracolich.png,
+Dragonborn.png,success,Dragonborn.png,
+Dragon_Turtle.png,success,Dragon_Turtle.png,
+Effandra.png,success,Effandra.png,
+Elvarel_Prath.png,success,Elvarel_Prath.png,
+Gargantuan_Lizard.png,success,Gargantuan_Lizard.png,
+Gargantuan_Snake.png,success,Gargantuan_Snake.png,
+Gecko.png,success,Gecko.png,
+Giant_Lizard.png,success,Giant_Lizard.png,
+Giant_Skeleton.png,success,Giant_Skeleton.png,
+Giant_Snake.png,success,Giant_Snake.png,
+Giant_Spider.png,success,Giant_Spider.png,
+Goblin.png,success,Goblin.png,
+Gophodros.png,success,Gophodros.png,
+Griffon-Eater.png,success,Griffon-Eater.png,
+Grusildrith.png,success,Grusildrith.png,
+Guardian_Skeleton.png,success,Guardian_Skeleton.png,
+Hobgoblin.png,success,Hobgoblin.png,
+Hydra.png,success,Hydra.png,
+Iguanodon.png,success,Iguanodon.png,
+Issiel.png,success,Issiel.png,
+Kobold.png,success,Kobold.png,
+Kraken.png,success,Kraken.png,
+Lieth_the_Taskmaster.png,success,Lieth_the_Taskmaster.png,
+Lizardfolk.png,success,Lizardfolk.png,
+Lump.png,success,Lump.png,
+Medusa.png,success,Medusa.png,
+Megaraptor_Skeleton.png,success,Megaraptor_Skeleton.png,
+Merrow.png,failed,,"Error code: 400 - {'error': {'message': 'Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 2bcff4f0-ca0d-4697-ae8d-6d6cb412b2f4. safety_violations=[sexual].', 'type': 'image_generation_user_error', 'param': None, 'code': 'moderation_blocked', 'moderation_details': {'moderation_stage': 'output', 'categories': ['sexual']}}}"
+Monitor_Lizard.png,success,Monitor_Lizard.png,
+Naga.png,success,Naga.png,
+Nagatha.png,success,Nagatha.png,
+Ogre.png,success,Ogre.png,
+Orc.png,success,Orc.png,
+Qalsarros.png,success,Qalsarros.png,
+Sahuagin.png,success,Sahuagin.png,
+Sahuagin_Baron.png,success,Sahuagin_Baron.png,
+Sailsnake.png,success,Sailsnake.png,
+Salamander.png,success,Salamander.png,
+Scale_Golem.png,success,Scale_Golem.png,
+Sea_Snake.png,success,Sea_Snake.png,
+Serpentfolk_Mystic.png,success,Serpentfolk_Mystic.png,
+Shiuahn.png,success,Shiuahn.png,
+Siolm.png,success,Siolm.png,
+Skeleton.png,success,Skeleton.png,
+Snapping_Turtle.png,success,Snapping_Turtle.png,
+Snapwing.png,success,Snapwing.png,
+Spider_Swarm.png,success,Spider_Swarm.png,
+Spitting_Cobra.png,success,Spitting_Cobra.png,
+Sulvaugren.png,success,Sulvaugren.png,
+The_Risen_King.png,success,The_Risen_King.png,
+Tolvul.png,success,Tolvul.png,
+Troglodyte.png,failed,,"Error code: 400 - {'error': {'message': 'Billing hard limit has been reached.', 'type': 'billing_limit_user_error', 'param': None, 'code': 'billing_hard_limit_reached'}}"
+Udmuela.png,failed,,"Error code: 400 - {'error': {'message': 'Billing hard limit has been reached.', 'type': 'billing_limit_user_error', 'param': None, 'code': 'billing_hard_limit_reached'}}"
+Viper.png,failed,,"Error code: 400 - {'error': {'message': 'Billing hard limit has been reached.', 'type': 'billing_limit_user_error', 'param': None, 'code': 'billing_hard_limit_reached'}}"
+Vsolt.png,failed,,"Error code: 400 - {'error': {'message': 'Billing hard limit has been reached.', 'type': 'billing_limit_user_error', 'param': None, 'code': 'billing_hard_limit_reached'}}"
+Wretched_Tide.png,failed,,"Error code: 400 - {'error': {'message': 'Billing hard limit has been reached.', 'type': 'billing_limit_user_error', 'param': None, 'code': 'billing_hard_limit_reached'}}"
+Wyvern.png,failed,,"Error code: 400 - {'error': {'message': 'Billing hard limit has been reached.', 'type': 'billing_limit_user_error', 'param': None, 'code': 'billing_hard_limit_reached'}}"
+Xorn.png,failed,,"Error code: 400 - {'error': {'message': 'Billing hard limit has been reached.', 'type': 'billing_limit_user_error', 'param': None, 'code': 'billing_hard_limit_reached'}}"
+Yensurros.png,failed,,"Error code: 400 - {'error': {'message': 'Billing hard limit has been reached.', 'type': 'billing_limit_user_error', 'param': None, 'code': 'billing_hard_limit_reached'}}"
+Yuan-Ti_Abomination.png,failed,,"Error code: 400 - {'error': {'message': 'Billing hard limit has been reached.', 'type': 'billing_limit_user_error', 'param': None, 'code': 'billing_hard_limit_reached'}}"
+Yuan-Ti_Halfblood.png,failed,,"Error code: 400 - {'error': {'message': 'Billing hard limit has been reached.', 'type': 'billing_limit_user_error', 'param': None, 'code': 'billing_hard_limit_reached'}}"
+Yuan-Ti_Malison.png,failed,,"Error code: 400 - {'error': {'message': 'Billing hard limit has been reached.', 'type': 'billing_limit_user_error', 'param': None, 'code': 'billing_hard_limit_reached'}}"
+Yuan-Ti_Pureblood.png,failed,,"Error code: 400 - {'error': {'message': 'Billing hard limit has been reached.', 'type': 'billing_limit_user_error', 'param': None, 'code': 'billing_hard_limit_reached'}}"
+Yuan-Ti_Pureblood_2.png,failed,,"Error code: 400 - {'error': {'message': 'Billing hard limit has been reached.', 'type': 'billing_limit_user_error', 'param': None, 'code': 'billing_hard_limit_reached'}}"
+Zoldathra.png,failed,,"Error code: 400 - {'error': {'message': 'Billing hard limit has been reached.', 'type': 'billing_limit_user_error', 'param': None, 'code': 'billing_hard_limit_reached'}}"
