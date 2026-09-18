@@ -4314,29 +4314,50 @@ function drawBillboards(dirX,dirY,planeX,planeY,horizon,zbuf){
     }
   }
 }
-// Which grid rows/columns the boundary fence runs along -- rows 5 & 27 are the
-// two horizontal runs (north/south edges), columns 9 & 37 are the two vertical
-// runs (west/east edges). This is a bespoke, one-map feature (same as
-// VILLAGE_BUILDINGS above), so it's a plain constant rather than derived.
-const VILLAGE_FENCE_ROWS = [5, 27];
-const VILLAGE_FENCE_COLS = [9, 37];
-/* Boundary fence panels are rendered as small STATIC, world-anchored quads --
-   each exactly spanning one tile's edge, so neighbouring panels butt together
-   with no gap -- rather than as camera-facing billboards like the rest of the
-   game's decor. A billboard always presents its full, undistorted face to the
-   player no matter the viewing angle, which reads as the panel silently
-   "turning" to track you as you walk past; a real static plane foreshortens
-   with perspective instead, the way an actual fence would. This projects both
-   endpoints of each panel's world-space segment with the same two-point
-   perspective transform the rest of the sprite system uses, then walks the
-   screen columns between them, interpolating depth and texture-U with the
-   standard "1-over-depth is linear in screen-X" trick so the perspective is
-   correct rather than a naive straight lerp (which would visibly warp the
-   texture on any panel not viewed dead-on). No contact shadow, unlike normal
-   decor -- these read as part of the boundary itself, not a placed object. */
+// The rectangular perimeter the boundary fence runs along -- this is a bespoke,
+// one-map feature (same as VILLAGE_BUILDINGS above), so it's a plain constant
+// rather than derived.
+const VILLAGE_FENCE_BOUNDS = {left:9, right:37, top:5, bottom:27};
+// Ordered, clockwise list of every fence tile around that rectangle, starting
+// at the top-left corner. Cached since it never changes.
+let _villageFencePathCache = null;
+function villageFencePath(){
+  if(_villageFencePathCache) return _villageFencePathCache;
+  const b = VILLAGE_FENCE_BOUNDS, path = [];
+  for(let x=b.left; x<=b.right; x++)        path.push([x, b.top]);           // top: left -> right
+  for(let y=b.top+1; y<=b.bottom; y++)      path.push([b.right, y]);         // east: top -> bottom
+  for(let x=b.right-1; x>=b.left; x--)      path.push([x, b.bottom]);        // bottom: right -> left
+  for(let y=b.bottom-1; y>b.top; y--)       path.push([b.left, y]);          // west: bottom -> top
+  _villageFencePathCache = path;
+  return path;
+}
+/* Boundary fence panels are rendered as small STATIC, world-anchored quads
+   rather than as camera-facing billboards like the rest of the game's decor.
+   A billboard always presents its full, undistorted face to the player no
+   matter the viewing angle, which reads as the panel silently "turning" to
+   track you as you walk past; a real static plane foreshortens with
+   perspective instead, the way an actual fence would.
+   Each rail connects the CENTRE of one perimeter tile to the centre of the
+   next one in walk order (a "post and rail" model) rather than each tile
+   drawing its own independent edge-to-edge quad -- the latter looked fine on
+   straight runs (adjacent quads share an edge) but left a visible gap at
+   every corner, where a horizontal quad and a vertical quad are centred on
+   different axes and never actually touch. Connecting tile CENTRES instead
+   means every junction, corner or not, shares an exact vertex, so there's
+   nowhere left for a gap to open up.
+   This projects both endpoints of each rail's world-space segment with the
+   same two-point perspective transform the rest of the sprite system uses,
+   then walks the screen columns between them, interpolating depth and
+   texture-U with the standard "1-over-depth is linear in screen-X" trick so
+   the perspective is correct rather than a naive straight lerp (which would
+   visibly warp the texture on any rail not viewed dead-on). No contact
+   shadow, unlike normal decor -- these read as part of the boundary itself,
+   not a placed object. */
 function drawFenceWalls(dirX,dirY,planeX,planeY,horizon,zbuf){
   const m = G.map;
   if(!m || !m.decor) return;
+  const path = villageFencePath();
+  const N = path.length;
   const inv = 1/(planeX*dirY - dirX*planeY);
   function project(px,py){
     const rx=px-CAM.x, ry=py-CAM.y;
@@ -4345,18 +4366,16 @@ function drawFenceWalls(dirX,dirY,planeX,planeY,horizon,zbuf){
     return {tX,tY};
   }
   const NEAR = 0.2;
-  for(const dkey in m.decor){
-    const dval = m.decor[dkey];
-    if(!dval || !dval.startsWith("fence")) continue;
+  for(let i=0;i<N;i++){
+    const [tileX,tileY] = path[i];
+    const dval = m.decor[tileX+","+tileY];
+    if(!dval || !dval.startsWith("fence")) continue;   // safety net; shouldn't normally trigger
     const tex = DECOR_TEX[dval]; if(!tex) continue;
     const info = DECOR_INFO[dval] || {h:0.6};
-    const p = dkey.split(","), tileX=+p[0], tileY=+p[1];
-    const horizontal = VILLAGE_FENCE_ROWS.indexOf(tileY) !== -1;
-    let wx0,wy0,wx1,wy1;
-    if(horizontal){ wx0=tileX;     wy0=tileY+0.5; wx1=tileX+1;   wy1=tileY+0.5; }
-    else           { wx0=tileX+0.5; wy0=tileY;     wx1=tileX+0.5; wy1=tileY+1;   }
+    const [nextX,nextY] = path[(i+1)%N];               // wraps the last rail back to tile 0
+    const wx0=tileX+0.5, wy0=tileY+0.5, wx1=nextX+0.5, wy1=nextY+0.5;
     let a = project(wx0,wy0), b = project(wx1,wy1);
-    if(a.tY<=NEAR && b.tY<=NEAR) continue;               // whole panel is behind the camera
+    if(a.tY<=NEAR && b.tY<=NEAR) continue;               // whole rail is behind the camera
     if(a.tY<=NEAR || b.tY<=NEAR){                          // near-plane clip one end
       const t = (NEAR - a.tY)/(b.tY - a.tY);
       const cx = wx0 + t*(wx1-wx0), cy = wy0 + t*(wy1-wy0);
@@ -4370,7 +4389,7 @@ function drawFenceWalls(dirX,dirY,planeX,planeY,horizon,zbuf){
     const xR=Math.min(PXW-1, Math.ceil(Math.max(sx0,sx1)));
     for(let s=xL; s<=xR; s++){
       const t = (s - sx0)/(sx1 - sx0);                      // linear in SCREEN space (valid)
-      if(t<0 || t>1) continue;                               // outside this panel's own span
+      if(t<0 || t>1) continue;                               // outside this rail's own span
       const invY_s = invY0 + t*(invY1-invY0);
       const tY_s = 1/invY_s;
       if(tY_s<=NEAR) continue;
