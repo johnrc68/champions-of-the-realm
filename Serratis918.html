@@ -641,62 +641,175 @@ function attackBonus(pc){ return statMod(pc.stats.STR); }
    ============================================================ */
 const MAPS = {
   town:{
-    name:"The Village", kind:"town", w:33,h:23,
+    name:"The Village", kind:"town", w:43,h:33,
     // Modeled on "The Surrounding Fields" reference: an open exterior with a river
     // running the length of the west edge (impassable), scattered buildings, a
     // fountain plaza at the center, and a fortress gate breaking the east wall --
     // the only way down into the dungeons of Castle Serratis proper. The Hanging
     // Tower stair opens onto the square from the north.
     grid:[
-      "#################################",
-      "#####..........#U#..............#",
-      "#####....#####........#####.....#",
-      "#####.F..#...#........#...#.....#",
-      "#####....#.T.#........#.T.#.....#",
-      "#####....##D##........##D##.....#",
-      "#####......................F....#",
-      "#####...........................#",
-      "#####...........................#",
-      "#####...........................#",
-      "#####...........................#",
-      "#####.F........................D#",
-      "#####...........................#",
-      "#####...........................#",
-      "#####.F.........................#",
-      "#####....##D##........##D##.....#",
-      "#####....#...#........#...#.....#",
-      "#####....#.T.#........#.T.#.....#",
-      "#####.F..#####........#####.....#",
-      "#####...........................#",
-      "#####...........................#",
-      "#####...........................#",
-      "#################################",
+      "###########################################",
+      "#####.....................................#",
+      "#####.....................................#",
+      "#####.....................................#",
+      "#####.....................................#",
+      "#####.....................................#",
+      "#####...............#U#...................#",
+      "#####.........#####........#####..........#",
+      "#####......F..#...#........#...#..........#",
+      "#####.........#.T.#........#.T.#..........#",
+      "#####.........##D##........##D##..........#",
+      "#####...........................F.........#",
+      "#####.....................................#",
+      "#####.....................................#",
+      "#####.....................................#",
+      "#####.....................................#",
+      "#####......F........................D.....#",
+      "#####.....................................#",
+      "#####.....................................#",
+      "#####......F..............................#",
+      "#####.........##D##........##D##..........#",
+      "#####.........#...#........#...#..........#",
+      "#####.........#.T.#........#.T.#..........#",
+      "#####......F..#####........#####..........#",
+      "#####.....................................#",
+      "#####.....................................#",
+      "#####.....................................#",
+      "#####.....................................#",
+      "#####.....................................#",
+      "#####.....................................#",
+      "#####.....................................#",
+      "#####.....................................#",
+      "###########################################",
     ],
-    start:[16,3], startDir:0,
+    start:[21,8], startDir:0,
     rooms:{
-      "16,1":{name:"The Village Gate", read:"Worn steps climb away into the dark behind you, back toward the Hanging Tower. Ahead, the village opens out under open sky, fields running down to a river on one side and a fortress wall on the other."},
-      "16,9":{name:"The Village Square", read:"A fountain murmurs at the heart of the open ground here -- the last quiet, ordinary place left in Castle Serratis."},
-      "11,4":{name:"The Tavern", read:"Long trestle tables, each ringed with stools, fill the low common room -- the everyday mess hall and drinking den for whoever still calls this place home."},
-      "24,4":{name:"The Shop", read:"Racked spears, shields and coils of chain line the walls; crates and spare tack are stacked wherever there's room."},
-      "11,17":{name:"The Temple", read:"A small votive chamber holds a single carved altar, candle-stubs guttering in wall niches around it."},
-      "24,17":{name:"The Training Yard", read:"A circular sparring floor, ringed by a low wooden rail, its boards scuffed pale by years of drilling boots."},
-      "31,11":{name:"The Fortress Gate", read:"A carved stone archway breaks the cliff wall here, twin serpents coiled about the frame -- the only way down into the dungeons of Castle Serratis proper."},
-      "16,8":{name:"The Old Well", read:"A low well-head of dressed stone, its rope long since rotted away."},
-      "7,14":{name:"An Abandoned Cart", read:"A hay cart, one wheel broken, left to rot at the field's edge."},
-      "27,7":{name:"A Standing Stone", read:"A weathered marker stone, its carvings worn past reading."},
-      "14,19":{name:"A Grain Silo", read:"A squat stone silo, empty and echoing when you rap on its side."},
-      "20,20":{name:"The Furrowed Fields", read:"Long rows of turned earth run off toward the south wall, gone to weeds -- whatever this village once grew, no one's harvested it in a long while."},
+      "21,6":{name:"The Village Gate", read:"Worn steps climb away into the dark behind you, back toward the Hanging Tower. Ahead, the village opens out under open sky, fields running down to a river on one side and a fortress wall on the other."},
+      "21,14":{name:"The Village Square", read:"A fountain murmurs at the heart of the open ground here -- the last quiet, ordinary place left in Castle Serratis."},
+      "16,9":{name:"The Tavern", read:"Long trestle tables, each ringed with stools, fill the low common room -- the everyday mess hall and drinking den for whoever still calls this place home."},
+      "29,9":{name:"The Shop", read:"Racked spears, shields and coils of chain line the walls; crates and spare tack are stacked wherever there's room."},
+      "16,22":{name:"The Temple", read:"A small votive chamber holds a single carved altar, candle-stubs guttering in wall niches around it."},
+      "29,22":{name:"The Training Yard", read:"A circular sparring floor, ringed by a low wooden rail, its boards scuffed pale by years of drilling boots."},
+      "36,16":{name:"The Fortress Gate", read:"A carved stone archway breaks the cliff wall here, twin serpents coiled about the frame -- the only way down into the dungeons of Castle Serratis proper."},
+      "20,17":{name:"The Old Well", read:"A low well-head of dressed stone, its rope long since rotted away."},
+      "12,19":{name:"An Abandoned Cart", read:"A hay cart, one wheel broken, left to rot at the field's edge."},
+      "32,12":{name:"A Standing Stone", read:"A weathered marker stone, its carvings worn past reading."},
+      "20,25":{name:"A Grain Silo", read:"A squat stone silo, empty and echoing when you rap on its side."},
+      "25,25":{name:"The Furrowed Fields", read:"Long rows of turned earth run off toward the south wall, gone to weeds -- whatever this village once grew, no one's harvested it in a long while."},
     },
     features:{ // "x,y": feature
-      "11,4":"tavern", "24,4":"shop", "11,17":"temple", "24,17":"training",
+      "16,9":"tavern", "29,9":"shop", "16,22":"temple", "29,22":"training",
     },
     decor:{
       // decorations removed — billboard sprites had visible non-transparent bounding boxes
-      "16,7":"well",  // The Old Well — real 3D-prop art (moved from 16,8 to the confirmed stone-ring tile)
-      "14,19":"silo", // A Grain Silo — real 3D-prop art (moved from 13,19)
-      "22,10":"windmill", // moved from 16,11 (was: replaces the old 3x3 snake-alcove wall block south of the Village Square)
+      "20,16":"well",  // The Old Well — real 3D-prop art (moved from 21,12; now solid so it can't be walked through)
+      "20,25":"silo", // A Grain Silo — real 3D-prop art (moved from 14,19)
+      "27,15":"windmill", // moved from 16,11 (was: replaces the old 3x3 snake-alcove wall block south of the Village Square)
+      // Fence line marking the old village boundary (where the outer walls used to
+      // stand before the map was expanded 5 tiles in every direction) -- fence1..fence10,
+      // randomized with no two identical panels adjacent, running the perimeter.
+      "9,5":"fence7",
+      "10,5":"fence9",
+      "11,5":"fence5",
+      "12,5":"fence4",
+      "13,5":"fence1",
+      "14,5":"fence6",
+      "15,5":"fence10",
+      "16,5":"fence3",
+      "17,5":"fence2",
+      "18,5":"fence8",
+      "19,5":"fence5",
+      "20,5":"fence3",
+      "21,5":"fence6",
+      "22,5":"fence1",
+      "23,5":"fence10",
+      "24,5":"fence2",
+      "25,5":"fence4",
+      "26,5":"fence8",
+      "27,5":"fence7",
+      "28,5":"fence9",
+      "29,5":"fence2",
+      "30,5":"fence9",
+      "31,5":"fence5",
+      "32,5":"fence6",
+      "33,5":"fence4",
+      "34,5":"fence7",
+      "35,5":"fence1",
+      "36,5":"fence3",
+      "37,5":"fence10",
+      "37,6":"fence8",
+      "37,7":"fence3",
+      "37,8":"fence7",
+      "37,9":"fence1",
+      "37,10":"fence6",
+      "37,11":"fence2",
+      "37,12":"fence10",
+      "37,13":"fence9",
+      "37,14":"fence5",
+      "37,15":"fence8",
+      "37,16":"fence4",
+      "37,17":"fence10",
+      "37,18":"fence2",
+      "37,19":"fence1",
+      "37,20":"fence3",
+      "37,21":"fence9",
+      "37,22":"fence7",
+      "37,23":"fence6",
+      "37,24":"fence4",
+      "37,25":"fence8",
+      "37,26":"fence5",
+      "37,27":"fence3",
+      "36,27":"fence10",
+      "35,27":"fence5",
+      "34,27":"fence1",
+      "33,27":"fence8",
+      "32,27":"fence4",
+      "31,27":"fence9",
+      "30,27":"fence6",
+      "29,27":"fence7",
+      "28,27":"fence2",
+      "27,27":"fence7",
+      "26,27":"fence8",
+      "25,27":"fence10",
+      "24,27":"fence4",
+      "23,27":"fence1",
+      "22,27":"fence9",
+      "21,27":"fence3",
+      "20,27":"fence5",
+      "19,27":"fence6",
+      "18,27":"fence2",
+      "17,27":"fence10",
+      "16,27":"fence5",
+      "15,27":"fence2",
+      "14,27":"fence9",
+      "13,27":"fence1",
+      "12,27":"fence7",
+      "11,27":"fence8",
+      "10,27":"fence6",
+      "9,27":"fence3",
+      "9,26":"fence4",
+      "9,25":"fence7",
+      "9,24":"fence5",
+      "9,23":"fence4",
+      "9,22":"fence10",
+      "9,21":"fence9",
+      "9,20":"fence2",
+      "9,19":"fence1",
+      "9,18":"fence6",
+      "9,17":"fence3",
+      "9,16":"fence8",
+      "9,15":"fence7",
+      "9,14":"fence8",
+      "9,13":"fence2",
+      "9,12":"fence5",
+      "9,11":"fence1",
+      "9,10":"fence3",
+      "9,9":"fence9",
+      "9,8":"fence6",
+      "9,7":"fence10",
+      "9,6":"fence4",
     },
-    exits:{ "31,11":"fields", "16,1":"keep2" }, // the fortress gate east, and the Hanging Tower stair up
+    exits:{ "36,16":"fields", "21,6":"keep2" }, // the fortress gate east, and the Hanging Tower stair up
   },
   slums:{
     name:"Castle Serratis", kind:"dungeon", w:13,h:11,
@@ -1460,7 +1573,7 @@ Object.assign(MAPS, {
    "clear the boss to reveal the stair down" rule (the base engine only
    did this for the original slums).
    --------------------------------------------------------------------- */
-MAPS.town.exits["31,11"] = "fields";   // the fortress gate leads into Castle Serratis
+MAPS.town.exits["36,16"] = "fields";   // the fortress gate leads into Castle Serratis
 
 (function generaliseFloorClearing(){
   if (typeof winCombat !== "function") return;
@@ -1817,12 +1930,12 @@ function isVisualWall(map,x,y){
    This only affects collision — NOT the raycaster's wall-face rendering —
    so the existing visuals are untouched. Add more decor names to SOLID_DECOR
    as needed for other "solid-looking but walkable-tile" props. */
-const SOLID_DECOR = new Set(["windmill","silo"]);
+const SOLID_DECOR = new Set(["windmill","silo","well","fence1","fence2","fence3","fence4","fence5","fence6","fence7","fence8","fence9","fence10"]);
 /* Decor rendered from real 3D-rendered/photographic prop art (as opposed to
    this game's usual hand-pixel-art decor like bones/skeletons/torches) looks
    bad when nearest-neighbor scaled column-by-column with the rest of decor —
    it needs bilinear smoothing instead. Add new photographic props here. */
-const PHOTO_PROP_DECOR = new Set(["well","silo","windmill"]);
+const PHOTO_PROP_DECOR = new Set(["well","silo","windmill","fence1","fence2","fence3","fence4","fence5","fence6","fence7","fence8","fence9","fence10"]);
 /* Colliding with these decor tiles is a *locked door*, not a plain wall: it plays
    a locked-door sound and prints a specific message instead of the generic
    "A wall blocks your path." Add other decor names here as needed. */
@@ -2006,6 +2119,31 @@ function loadWindmillProp(){
   };
   img.src = WINDMILL_PROP_IMG;
 }
+/* Load the ten boundary-fence panel images as DECOR_TEX.fence1..DECOR_TEX.fence10.
+   Same loader pattern as loadWellProp()/loadSiloProp()/loadWindmillProp() -- each
+   drawn onto its own canvas at a fixed size so the billboard renderer picks it up
+   automatically once it loads. Source PNGs are expected to have a transparent
+   background like the other real-photo props. */
+function loadFenceProps(){
+  if(typeof FENCE_PROP_IMGS === "undefined") return;
+  FENCE_PROP_IMGS.forEach(function(src, i){
+    const key = "fence" + (i+1);
+    const img = new Image();
+    img.onload = ()=>{
+      const W2 = 512, H2 = Math.round(512 * img.height / img.width);
+      const c = px(W2, H2), x = c.getContext("2d");
+      x.imageSmoothingEnabled = true;
+      x.drawImage(img, 0, 0, W2, H2);
+      DECOR_TEX[key] = c;
+    };
+    // Unlike the other prop loaders, this one warns on failure -- with ten files
+    // sharing one function, a single missing/misnamed image (wrong case, wrong
+    // extension, not actually present in assets/) would otherwise fail completely
+    // silently and just leave that one fence variant invisible with no clue why.
+    img.onerror = ()=>{ console.warn("[fence] failed to load "+src+" -- check it exists in the assets folder next to this HTML file"); };
+    img.src = src;
+  });
+}
 /* Load the real 3D-rendered gatehouse prop as a WALL-FACE texture (TEX.villageGate),
    not a decor billboard — this fully replaces what the raycaster draws on the
    Village Gate's "U" tile (16,1) instead of layering a sprite in front of the
@@ -2139,7 +2277,7 @@ function applyAsset(kind, img){
   }
 }
 /* resolved getters used by the renderer (asset first, procedural fallback) */
-const TAVERN_ROOM = {x0:10,x1:12,y0:3,y1:4}; // tavern interior floor
+const TAVERN_ROOM = {x0:15,x1:17,y0:8,y1:9}; // tavern interior floor
 function inTavernRoom(){
   return !!(G.map && G.map.name===MAPS.town.name &&
     G.px>=TAVERN_ROOM.x0 && G.px<=TAVERN_ROOM.x1 &&
@@ -2209,8 +2347,8 @@ function _groundNoise(x,y){
    near structures can be hand-placed while everything else keeps filling in
    organically. Zones with no file present just fall through to the normal system. */
 const GROUND_ZONES = {
-  1:"11,6", 2:"24,6", 3:"11,14", 4:"24,14", 5:"16,8", 6:"16,13", 7:"6,9",
-  8:"16,2", 9:"29,11", 10:"16,20", 11:"20,10", 12:"16,7", 13:"7,14", 14:"27,7", 15:"14,19",
+  1:"16,11", 2:"29,11", 3:"16,19", 4:"29,19", 5:"20,17", 6:"21,18", 7:"11,14",
+  8:"21,7", 9:"34,16", 10:"21,25", 11:"25,15", 12:"20,16", 13:"12,19", 14:"32,12", 15:"20,25",
 };
 const GROUND_OVERRIDES = {};
 function initGroundOverrides(){
@@ -2230,39 +2368,39 @@ initGroundOverrides();
    numbered map) it should cover. */
 const GROUND_MANUAL_ASSIGNMENTS = [
   { file:"ground-left_to_right.png", tiles:[
-      "5,9","8,9","9,9","10,9",                              // #191,194,195,196
-      "8,14","9,14","10,14",                                       // #329-331
-      "12,7","13,7","14,7",                                        // #144-146
-      "12,14","13,14","14,14","15,14",                             // #333-336
-      "17,14","18,14",                                                // #338-339
-      "21,11","22,11","23,11",                                     // #261-263
-      "25,11","26,11","27,11","28,11","29,11","30,11",             // #265-270
-      "18,7",                                                         // #150
-      "20,11",                                                       // #260
-      "15,19",                                                        // #445 ("14,19" now carries the silo's own ground_zone15 texture instead — see GROUND_ZONES)
-      "17,7",                                                        // #149
-      "15,7",                                                        // #147
+      "10,14","13,14","14,14","15,14",                              // #191,194,195,196
+      "13,19","14,19","15,19",                                       // #329-331
+      "17,12","18,12","19,12",                                        // #144-146
+      "17,19","18,19","19,19","20,19",                             // #333-336
+      "22,19","23,19",                                                // #338-339
+      "26,16","27,16","28,16",                                     // #261-263
+      "30,16","31,16","32,16","33,16","34,16","35,16",             // #265-270
+      "23,12",                                                         // #150
+      "25,16",                                                       // #260
+      "20,24",                                                        // #445 ("20,25" now carries the silo's own ground_zone15 texture instead — see GROUND_ZONES)
+      "22,12",                                                        // #149
+      "20,12",                                                        // #147
     ] },
-  { file:"ground-T-down.png",     tiles:["7,9"] },                          // #193
+  { file:"ground-T-down.png",     tiles:["12,14"] },                          // #193
   { file:"ground-top_to_bottom.png", tiles:[
-      "7,10","7,11","7,12","7,13",                    // #220,247,274,301
-      "19,8","19,9","19,10","19,12","19,13",          // #178,205,232,286,313
-      "24,6","24,7","24,8","24,9","24,10","24,12","24,13","24,14", // #129,156,183,210,237,291,318,345
-      "16,13","16,15","16,16","16,17","16,18",        // #310,360,381,404,424
-      "11,6","11,8",                                   // #116,170
-      "16,1","16,2","16,3","16,4","16,5",              // #12,34,54,77,98
-      "11,10","11,11","11,12",                          // #224,251,278
-      "11,13",                                          // #305
-      "16,6",                                           // #121
-      "6,4","6,5","6,6","6,7","6,8",                    // #69,92,111,138,165
+      "12,15","12,16","12,17","12,18",                    // #220,247,274,301
+      "24,13","24,14","24,15","24,17","24,18",          // #178,205,232,286,313
+      "29,11","29,12","29,13","29,14","29,15","29,17","29,18","29,19", // #129,156,183,210,237,291,318,345
+      "21,18","21,20","21,21","21,22","21,23",        // #310,360,381,404,424
+      "16,11","16,13",                                   // #116,170
+      "21,6","21,7","21,8","21,9","21,10",              // #12,34,54,77,98
+      "16,15","16,16","16,17",                          // #224,251,278
+      "16,18",                                          // #305
+      "21,11",                                           // #121
+      "11,9","11,10","11,11","11,12","11,13",                    // #69,92,111,138,165
     ] },
-  { file:"ground-crossroad.png",  tiles:["24,11","16,14","11,14"] },       // #264, #337, #332 -- four-way intersection
-  { file:"ground-right-up.png",   tiles:["7,14"] },                        // #328 -- turn: vertical bending east
-  { file:"ground-T-left.png",     tiles:["11,9"] },                        // #197 -- T-junction, stem pointing left
-  { file:"ground-T-right.png",    tiles:["11,7","19,11"] },                // #143, #259 -- T-junction, stem pointing right
-  { file:"ground-left-up.png",    tiles:["16,19","19,14"] },                // #446, #340 -- turn: left bending north
-  { file:"ground-T-up.png",       tiles:["6,9"] },                        // #192 -- T-junction, stem pointing up
-  { file:"ground-left-down.png",  tiles:["19,7"] },                        // #151
+  { file:"ground-crossroad.png",  tiles:["29,16","21,19","16,19"] },       // #264, #337, #332 -- four-way intersection
+  { file:"ground-right-up.png",   tiles:["12,19"] },                        // #328 -- turn: vertical bending east
+  { file:"ground-T-left.png",     tiles:["16,14"] },                        // #197 -- T-junction, stem pointing left
+  { file:"ground-T-right.png",    tiles:["16,12","24,16"] },                // #143, #259 -- T-junction, stem pointing right
+  { file:"ground-left-up.png",    tiles:["21,24","24,19"] },                // #446, #340 -- turn: left bending north
+  { file:"ground-T-up.png",       tiles:["11,14"] },                        // #192 -- T-junction, stem pointing up
+  { file:"ground-left-down.png",  tiles:["24,12"] },                        // #151
 ];
 function initGroundManualAssignments(){
   for(const entry of GROUND_MANUAL_ASSIGNMENTS){
@@ -2692,6 +2830,16 @@ const DECOR_INFO={
   well:        { h:1.15, w:1.05 },  // real 3D-prop art — moderated down from 1.45 (looked like it was towering/floating above its footprint)
   silo:        { h:6.62, w:4.23 },  // full-size grain silo — source is 2391x3742 with ~950px door; scale matches its door to the standard ~0.679-tile building door while preserving the source aspect ratio
   windmill:    { h:6.62, w:3.31 },  // real 3D-prop art — scale re-derived by measuring actual pixels in both source images (not guessed): in the reference door texture (tav_door.png, 1024x1252) the door leaf itself runs from y≈300 to y≈1150, so it occupies ~850/1252 ≈ 67.9% of a full 1.0-tile-height wall face. In the windmill prop (windmill_standard_door_scale.png, 5629x11257) its own door runs from y≈9700 (stone lintel → dark planks) to y≈10855 (planks → stone threshold), so the door there is ~1155/11257 ≈ 10.26% of the full image height. Scaling the whole windmill sprite to h tiles tall makes its door appear h*10.26% tiles tall; setting that equal to the reference's 67.9% gives h = 0.679/0.1026 ≈ 6.62. w:3.31 preserves the image's actual ~1:2 (w:h) aspect ratio (5629/11257 ≈ 0.500) undistorted at that height.
+  fence1:      { h:1.0, w:1.15 },  // boundary fence panel — full tile width so panels read as a continuous line
+  fence2:      { h:1.0, w:1.15 },
+  fence3:      { h:1.0, w:1.15 },
+  fence4:      { h:1.0, w:1.15 },
+  fence5:      { h:1.0, w:1.15 },
+  fence6:      { h:1.0, w:1.15 },
+  fence7:      { h:1.0, w:1.15 },
+  fence8:      { h:1.0, w:1.15 },
+  fence9:      { h:1.0, w:1.15 },
+  fence10:      { h:1.0, w:1.15 },
   arch:        { h:1.65, w:1.30 },
   // new types
   torch:       { h:0.55, w:0.30, anchor:"middle", glow:true },  // mounted ~head-height on wall
@@ -2713,6 +2861,7 @@ function buildDecorTex(){
   loadWellProp();       // replaces the procedural well above with the real 3D-prop image once it loads
   loadSiloProp();       // new decor type for the Grain Silo, which previously had no sprite
   loadWindmillProp();   // new decor type replacing the 3x3 snake-alcove wall block south of the Village Square
+  loadFenceProps();     // ten boundary-fence panel variants ringing the old village wall line
   DECOR_TEX.arch       = makeArchTex();
   DECOR_TEX.torch      = makeTorchTex();
   DECOR_TEX.cobweb     = makeCobwebTex();
@@ -4436,7 +4585,7 @@ function onEnterTile(){
   if(t==="D" && typeof SFX!=="undefined") SFX.play("door");
   {
     const nowInTavern = !!(G.map && G.map.name===MAPS.town.name &&
-      G.px>=9 && G.px<=13 && G.py>=2 && G.py<=5);
+      G.px>=14 && G.px<=18 && G.py>=7 && G.py<=10);
     const wasInTavern = !!G._inTavern;
     if(nowInTavern && !wasInTavern){
       console.log("[tavern] entering", G.px, G.py, "entryAlreadyPlayed:", _tavernEntryPlayed);
@@ -4480,7 +4629,7 @@ function onEnterTile(){
     log("You pass through to "+(MAPS[dest].name)+".","sys");
     if(typeof SFX!=="undefined") SFX.play("door");
     // place at that map's relevant entrance
-    if(dest==="town"){ enterMap("town",{x:5,y:7,dir:0}); return; }
+    if(dest==="town"){ enterMap("town",{x:10,y:12,dir:0}); return; }
     enterMap(dest); return;
   }
   // stairs leading down — an archway wall you pass through like a doorway
@@ -6693,6 +6842,12 @@ const WELL_PROP_IMG = "assets/WELL_PROP_IMG.png";
 const SILO_PROP_IMG = "assets/SILO_PROP_IMG.png";
 const GATE_PROP_IMG = "assets/GATE_PROP_IMG.png";
 const WINDMILL_PROP_IMG = "assets/WINDMILL_PROP_IMG.png";
+// Boundary fence panels (village perimeter) — ten variants for visual variety,
+// placed and randomized (no two identical panels adjacent) in MAPS.town.decor.
+const FENCE_PROP_IMGS = [
+  "assets/fence1.png", "assets/fence2.png", "assets/fence3.png", "assets/fence4.png", "assets/fence5.png",
+  "assets/fence6.png", "assets/fence7.png", "assets/fence8.png", "assets/fence9.png", "assets/fence10.png",
+];
 const GREAT_HALL_DOOR_IMG = "assets/GREAT_HALL_DOOR_IMG.png";
 const DOOR_OVERLAY_IMG = "assets/DOOR_OVERLAY_IMG.png";
 const FIELDS_SHRINE_IMG = "assets/FIELDS_SHRINE_IMG.png";
@@ -7288,10 +7443,10 @@ function greatHallDoorTex(map,x,y){
    any other side -- always uses the stained-glass ext_church_window.png
    instead, so the temple never shows the generic window art. */
 const VILLAGE_BUILDINGS = [
-  {x0:9, x1:13, y0:2,  y1:5,  doorX:11, doorY:5,  winX:11, winY:2,  temple:false}, // tavern
-  {x0:22,x1:26, y0:2,  y1:5,  doorX:24, doorY:5,  winX:24, winY:2,  temple:false}, // shop
-  {x0:9, x1:13, y0:15, y1:18, doorX:11, doorY:15, winX:11, winY:18, temple:true},  // temple
-  {x0:22,x1:26, y0:15, y1:18, doorX:24, doorY:15, winX:24, winY:18, temple:false}, // training yard
+  {x0:14, x1:18, y0:7,  y1:10, doorX:16, doorY:10, winX:16, winY:7,  temple:false}, // tavern
+  {x0:27, x1:31, y0:7,  y1:10, doorX:29, doorY:10, winX:29, winY:7,  temple:false}, // shop
+  {x0:14, x1:18, y0:20, y1:23, doorX:16, doorY:20, winX:16, winY:23, temple:true},  // temple
+  {x0:27, x1:31, y0:20, y1:23, doorX:29, doorY:20, winX:29, winY:23, temple:false}, // training yard
 ];
 function _extWallRandomVariant(mapX,mapY){
   const variants = [TEX.ext1,TEX.ext2,TEX.ext3,TEX.ext4,TEX.ext5,TEX.ext6].filter(Boolean);
